@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block title %}
+List All Students
+{% endblock %}
+{% block content %}
+        <table border="1px">
+            <thead>
+                <td><strong>Cinephile ID</strong></td>
+                <td><strong>Name</strong></td>
+                <td><strong>Fav_movie</strong></td>
+                <td><strong>Country</strong></td>
+                <td></td>
+                <td></td>
+            </thead>
+
+            {% for row in rows %}
+            <td>{{ row["rowid"] }}</td>
+            <td>{{ row["name"] }}</td>
+            <td> {{ row["fav_movie"]}}</td>
+            <td>{{ row["country"] }}</td>
+            <td><form action="{{url_for('edit')}}" method="POST"><input type="hidden" name="id" value="{{ row['rowid'] }}"><input type="submit" value="Edit"></form> </td>
+            <td><form onsubmit="return confirm('Are you sure you want to DELETE this Member from the Database?');" action="{{url_for('delete')}}" method="POST"><input type="hidden" name="id" value="{{ row['rowid'] }}"><input type="submit" value="Delete"></form> </td>
+            {% endfor %}
+        </table>
+{% endblock %}
